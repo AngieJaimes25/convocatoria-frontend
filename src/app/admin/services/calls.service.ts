@@ -30,4 +30,9 @@ export class CallsService {
         catchError(err => throwError(() => err.error.message))
       );
   }
+
+  getCalls(): Observable<any> {
+    const url  = `${ this.baseUrl }/convocatoria/listarPasadas`;
+    return this.http.get( url, this.commonOptions );
+  }
 }

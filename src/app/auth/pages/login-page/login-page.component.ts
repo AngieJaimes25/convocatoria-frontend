@@ -12,7 +12,7 @@ export class LoginPageComponent {
 
   private fb          = inject( FormBuilder );
   private authService = inject( AuthService );
-  private router      = inject( Router )
+  private router      = inject( Router );
 
   public myForm: FormGroup = this.fb.group({
     codigo:   ['123456', [ Validators.required, Validators.minLength(6) ]],  

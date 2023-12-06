@@ -1,1 +1,12 @@
-<p>history-call-pages works!</p>
+<div class="px-6 py-4">
+    <h1 class="text-2xl text-600">Historial de convocatorias</h1>
+    <div class="flex flex-column">
+        @for(convocatoria of convocatorias; track convocatoria.id){
+            <div class="border-round border-1 border-200 flex justify-content-between 
+                        align-items-center w-full px-4 py-3">
+                <div class="text-600">{{ convocatoria.nombre }}</div>
+                <p-button (click)="ver( convocatoria.id )" type="submit" size="small" label="Ver" severity="danger"></p-button>
+            </div>
+        }
+    </div>
+</div>

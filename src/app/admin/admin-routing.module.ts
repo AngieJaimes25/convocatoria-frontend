@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ListCallsPageComponent } from './pages/list-calls-page/list-calls-page.component';
+
 import { AdminLayoutComponent } from './layout/admin-layout/admin-layout.component';
 import { ListProposalsPageComponent } from './pages/list-proposals-page/list-proposals-page.component';
 import { AddCallPageComponent } from './pages/add-call-page/add-call-page.component';
+import { HistoryCallPagesComponent } from './pages/history-call-pages/history-call-pages.component';
 
 const routes: Routes = [
   {
@@ -13,7 +14,7 @@ const routes: Routes = [
       { path: 'convocatorias', 
         children: [
           { path: '', component: AddCallPageComponent },
-          { path: 'listar', component: ListCallsPageComponent },
+          { path: 'historial', component: HistoryCallPagesComponent },
           { path: '**', redirectTo: '' }
         ]
       },

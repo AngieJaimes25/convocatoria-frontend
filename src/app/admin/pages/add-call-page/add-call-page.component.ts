@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { CallsService } from '../../services/calls.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-call-page',
@@ -11,6 +12,7 @@ import { CallsService } from '../../services/calls.service';
 export class AddCallPageComponent {
   private fb          = inject( FormBuilder );
   private callsService = inject( CallsService );
+  private router      = inject( Router );
 
   public myForm: FormGroup = this.fb.group({
     fechaInicio: ['', [ Validators.required ]],
@@ -20,6 +22,10 @@ export class AddCallPageComponent {
 
   isValidField( field: string ) {
     return this.myForm.controls[field].errors && this.myForm.controls[field].touched;
+  }
+
+  toHistory() {
+    this.router.navigateByUrl('/admin/convocatorias/historial');
   }
 
   submit() {
