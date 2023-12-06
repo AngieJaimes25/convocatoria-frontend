@@ -1,21 +1,28 @@
-<form class="flex flex-column">
+<form class="flex flex-column"
+      [formGroup]="myForm"
+      (ngSubmit)="login()">
     <h1 class="text-center mb-6 font-medium">Inicio de Sesión</h1>
 
     <div class="flex flex-column gap-2 mb-4">
+        <label for="codigo" class="text-sm">Codigo</label>
+        <input pInputText class="p-inputtext-sm" id="codigo" formControlName="codigo"/>
+    </div>
+
+    <div class="flex flex-column gap-2 mb-4">
         <label for="email" class="text-sm">Email</label>
-        <input pInputText class="p-inputtext-sm" id="email"/>
+        <input pInputText class="p-inputtext-sm" id="email" formControlName="email"/>
     </div>
 
     <div class="flex flex-column gap-2 mb-3">
-        <label for="password" class="text-sm">Contraseña</label>
-        <p-password [toggleMask]="true" class="p-inputtext-sm" 
-                    inputId="password" inputStyleClass="w-full" styleClass="w-full"></p-password>
+        <label for="contrasenia" class="text-sm">Contraseña</label>
+        <p-password [toggleMask]="true" class="p-inputtext-sm" formControlName="contrasenia"
+                    inputId="contrasenia" inputStyleClass="w-full" styleClass="w-full"></p-password>
     </div>
-    <a class="text-red-600 text-sm mb-7 cursor-pointer">Recuperar contraseña</a>
+    <a class="text-red-600 text-sm mb-3 cursor-pointer">Recuperar contraseña</a>
     
-    <p-button size="small" styleClass="w-full" label="Iniciar Sesión" severity="danger"></p-button>
+    <p-button type="submit" size="small" styleClass="w-full" label="Iniciar Sesión" severity="danger"></p-button>
 
-    <div class="text-600 text-sm mt-8 text-center">
+    <div class="text-600 text-sm mt-7 text-center">
         No te encuentras registrado?
         <a routerLink="/auth/register" 
            class="text-red-600 cursor-pointer no-underline">Crear una cuenta</a>
