@@ -12,34 +12,15 @@ export class HistoryCallPagesComponent {
   private callsService = inject( CallsService );
   private router       = inject( Router );
 
-  convocatorias: any[] = [
-    {
-      "id": 1,
-      "nombre": "Convocatoria 2020 - Semestre 2",
-      "fechaInicio": "2020-10-15T00:00:00.000+00:00",
-      "fechaFin": "2020-12-11T00:00:00.000+00:00",
-      "fechaResultados": "2020-12-21T00:00:00.000+00:00",
-      "estado": false,
-    }
-  ];
+  convocatorias: any[] = [];
 
   ngOnInit(): void {
-    this.callsService.getCalls()
-      .subscribe( data => this.convocatorias = data);
-
-    this.convocatorias = [
-      {
-        "id": 1,
-        "nombre": "Convocatoria 2020 - Semestre 2",
-        "fechaInicio": "2020-10-15T00:00:00.000+00:00",
-        "fechaFin": "2020-12-11T00:00:00.000+00:00",
-        "fechaResultados": "2020-12-21T00:00:00.000+00:00",
-        "estado": false,
-      }
-    ];
+    /* this.callsService.getCalls()
+      .subscribe( data => this.convocatorias = data); */
+    this.convocatorias = this.callsService.getCalls();
   }
 
   ver(id:number) {
-    this.router.navigateByUrl(`admin/convocatoria/ver/${id}`);
+    this.router.navigateByUrl(`admin/convocatorias/editar/${id}`);
   }
 }

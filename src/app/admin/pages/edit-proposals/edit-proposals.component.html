@@ -1,6 +1,53 @@
-<div class="">
-    <form>
-        <div class="text-2xl mb-2 font-semibold text-700">Modificar Propuesta</div>
-        
-    </form> 
-</div>
+<!-- <div class="px-6 py-4">
+    <div class="text-2xl mb-6 font-semibold text-700">Modificar Propuesta</div>
+    <form class="formgrid grid p-fluid" [formGroup]="myForm" (ngSubmit)="submit()">
+        <div class="field mb-4 col-12 md:col-6 px-5">
+            <label class="mb-2 text-900">Nombre de la Propuesta</label>
+            <input pInputText formControlName="nombre" styleClass="p-inputtext-sm"/>
+            <span *ngIf="isValidField('nombre')" class="text-sm text-red-600">
+                El nombre de la propuesta es requerida
+            </span>
+        </div>
+
+        <div class="formgrid mb-4 col-12 px-5">
+            <div class="mb-3">Estudiante/s propotente/s</div>
+            <div class="field mb-4 col-12 md:col-3">
+                <label class="mb-2 text-900">Nombre</label>
+                <input pInputText formControlName="nombreEstudiante" styleClass="p-inputtext-sm" />
+            </div>
+            <div class="field mb-4 col-12 md:col-3">
+                <label class="mb-2 text-900">Cedula</label>
+                <input pInputText formControlName="cedulaEstudiante" styleClass="p-inputtext-sm" />
+            </div>
+            <div class="field mb-4 col-12 md:col-3>
+                <label class="mb-2 text-900">Codigo</label>
+                <input pInputText formControlName="codigoEstudiante" styleClass="p-inputtext-sm" />
+            </div>
+            <div class="field mb-4 col-12 md:col-3">
+                <label class="mb-2 text-900">Semetre</label>
+                <input pInputText formControlName="semestreEstudiante" styleClass="p-inputtext-sm" />
+            </div>
+        </div>    
+        <div class="field mb-4 col-12 md:col-6 px-5">
+            <label class="mb-2 text-900">Fecha de Fin de Inscripción</label>
+            <input pInputText formControlName="fechaFin" styleClass="p-inputtext-sm" />
+            <span *ngIf="isValidField('fechaFin')" class="text-sm text-red-600">
+                La fecha de fin de inscripción es requerida
+            </span>
+        </div>
+
+        <div class="field mb-7 col-12 md:col-6 px-5">
+            <label class="mb-2 text-900">Fecha de Presentación de resultados</label>
+            <p-calendar formControlName="fechaResultados" styleClass="p-inputtext-sm"
+                dateFormat="dd/mm/yy"></p-calendar>
+            <span *ngIf="isValidField('fechaResultados')" class="text-sm text-red-600">
+                La fecha de fin del resultado es requerida
+            </span>
+        </div>
+
+        <div class="field mb-4 col-12">
+            <p-button type="submit" size="small" label="Abrir/Modificar Convocatoria"
+                      severity="danger"></p-button>
+        </div>
+    </form>
+</div> -->

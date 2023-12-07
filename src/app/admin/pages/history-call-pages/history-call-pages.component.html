@@ -3,7 +3,7 @@
     <div class="flex flex-column">
         @for(convocatoria of convocatorias; track convocatoria.id){
             <div class="border-round border-1 border-200 flex justify-content-between 
-                        align-items-center w-full px-4 py-3">
+                        align-items-center w-full px-4 py-3 mb-3">
                 <div class="text-600">{{ convocatoria.nombre }}</div>
                 <p-button (click)="ver( convocatoria.id )" type="submit" size="small" label="Ver" severity="danger"></p-button>
             </div>
