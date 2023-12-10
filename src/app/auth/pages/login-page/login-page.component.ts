@@ -20,7 +20,7 @@ export class LoginPageComponent {
   public myForm: FormGroup = this.fb.group({
     codigo:   ['05432', [ Validators.required, Validators.minLength(4) ]],  
     email:    ['admin@ufps.edu.co', [ Validators.required, Validators.email ]],
-    contrasenia: ['1234', [ Validators.required, Validators.minLength(3) ]],
+    contrasenia: ['', [ Validators.required, Validators.minLength(3) ]],
   });
 
   public myFormPassword: FormGroup = this.fb.group({
