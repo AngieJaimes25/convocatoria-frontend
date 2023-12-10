@@ -44,11 +44,12 @@ export class LoginPageComponent {
     this.authService.login(codigo, email, contrasenia)
       .subscribe({
         next: () => {
-          if(codigo.startsWith('1')) {
+          this.router.navigateByUrl('/admin');
+          /* if(codigo.startsWith('1')) {
             this.router.navigateByUrl('/admin');
           } else {
             this.router.navigateByUrl('/user');
-          }
+          } */
         },
         error: (message) => {
           this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Credenciales incorrectas' });
