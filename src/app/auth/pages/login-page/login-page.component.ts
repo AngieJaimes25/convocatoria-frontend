@@ -44,6 +44,7 @@ export class LoginPageComponent {
     this.authService.login(codigo, email, contrasenia)
       .subscribe({
         next: () => {
+          alert('exitoso');
           this.router.navigateByUrl('/admin');
           /* if(codigo.startsWith('1')) {
             this.router.navigateByUrl('/admin');
@@ -51,7 +52,8 @@ export class LoginPageComponent {
             this.router.navigateByUrl('/user');
           } */
         },
-        error: (message) => {
+        error: (erro) => {
+          console.log(erro);
           this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Credenciales incorrectas' });
         }
       });
