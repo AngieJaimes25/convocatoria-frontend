@@ -36,7 +36,6 @@ export class AuthService {
   login( codigo: string, email: string, contrasenia: string ): Observable<boolean> {
     const url  = `${ this.baseUrl }/login`;
     const body = { codigo, email, contrasenia };
-    console.log(body);
     return this.http.post<LoginResponse>(url, body)
     .pipe(
       map(({ Username, token }) => this.setAuthentication(Username, token)),
@@ -59,6 +58,11 @@ export class AuthService {
         map( ({ Username, token }) => this.setAuthentication( Username, token )),
         catchError( err => throwError( () => err.error.message ))
       );
+  }
+
+  resetPassword( email: String ):Observable<any> {
+    const url  = `${ this.baseUrl }/usuario/reestablecerContrasenia?email=${email}`;
+    return this.http.post<LoginResponse>(url, null);
   }
 
   checkAuthStatus():Observable<boolean> {

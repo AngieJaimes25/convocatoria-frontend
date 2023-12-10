@@ -18,13 +18,23 @@ export class LoginPageComponent {
   private messageService = inject( MessageService );
 
   public myForm: FormGroup = this.fb.group({
-    codigo:   ['1152323', [ Validators.required, Validators.minLength(6) ]],  
-    email:    ['gibsonarbeyrb@ufps.edu.co', [ Validators.required, Validators.email ]],
-    contrasenia: ['12345678', [ Validators.required, Validators.minLength(6) ]],
+    codigo:   ['05432', [ Validators.required, Validators.minLength(4) ]],  
+    email:    ['admin@ufps.edu.co', [ Validators.required, Validators.email ]],
+    contrasenia: ['1234', [ Validators.required, Validators.minLength(3) ]],
   });
+
+  public myFormPassword: FormGroup = this.fb.group({
+    email:    ['admin@ufps.edu.co', [ Validators.required, Validators.email ]],
+  });
+
+  visible: boolean = false;
 
   isValidField( field: string ) {
     return this.myForm.controls[field].errors && this.myForm.controls[field].touched;
+  }
+  
+  showDialog() {
+    this.visible = true;
   }
 
   login() {
@@ -41,8 +51,22 @@ export class LoginPageComponent {
           }
         },
         error: (message) => {
-          console.log(message);
           this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Credenciales incorrectas' });
+        }
+      });
+  }
+
+  resetPassword() {
+    this.authService.resetPassword(this.myFormPassword.value.email)
+      .subscribe({
+        next: () => {
+          this.messageService.add({ severity: 'success', summary: 'Exito', detail: 'Se ha enviado un correo de recuperacion' });
+        },
+        error: (error) => {
+          if(error.status === 200) {
+            this.messageService.add({ severity: 'success', summary: 'Exito', detail: 'Se ha enviado un correo de recuperacion' });
+          }
+          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error al enviar el correo de recuperacion' });
         }
       });
   }
