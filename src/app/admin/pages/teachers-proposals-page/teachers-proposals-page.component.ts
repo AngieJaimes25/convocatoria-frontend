@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { TeachersService } from '../../services/teachers.service';
 
 @Component({
   selector: 'app-teachers-proposals-page',
@@ -6,5 +7,13 @@ import { Component } from '@angular/core';
   styleUrl: './teachers-proposals-page.component.css'
 })
 export class TeachersProposalsPageComponent {
+
+  private teacher = inject(TeachersService);
+  profesores: any[] = [];
+
+  ngOnInit(): void {
+    this.teacher.getTeachers()
+      .subscribe( data => this.profesores = data ); 
+  }
 
 }

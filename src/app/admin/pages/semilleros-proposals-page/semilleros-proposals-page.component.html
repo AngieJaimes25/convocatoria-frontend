@@ -1,1 +1,28 @@
-<p>semilleros-proposals-page works!</p>
+<div class="px-6 py-5">
+
+    <div class="mb-6">
+        <div class="text-xl mb-3 font-semibold">Semilleros</div>
+        <p-table [value]="semilleros" [tableStyle]="{ 'min-width': '50rem' }">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Codigo del Semillero</th>
+                    <th>Nombre del Semillero</th>
+                    <th>Sigla</th>
+                    <th>Estado</th>
+                    <th>Editar</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-semillero>
+                <tr>
+                    <td>{{ semillero.codigo }}</td>
+                    <td>{{ semillero.nombre }}</td>
+                    <td>{{ semillero.sigla }}</td>
+                    <td> Activo </td>
+                    <td>
+                        <p-button icon="pi pi-pencil" [rounded]="true" severity="warning" [outlined]="true"></p-button>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</div>

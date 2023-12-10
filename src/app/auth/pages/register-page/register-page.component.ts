@@ -2,17 +2,20 @@ import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-register-page',
   templateUrl: './register-page.component.html',
-  styleUrl: './register-page.component.css'
+  styleUrl: './register-page.component.css',
+  providers: [MessageService]
 })
 export class RegisterPageComponent {
 
   private fb          = inject( FormBuilder );
   private authService = inject( AuthService );
-  private router      = inject( Router )
+  private router      = inject( Router );
+  private messageService = inject( MessageService );
 
   public myForm: FormGroup = this.fb.group({
     codigo:      ['0', [ Validators.required, Validators.minLength(5) ]],
@@ -35,8 +38,7 @@ export class RegisterPageComponent {
           }
         },
         error: (message) => {
-          console.log(message);
-          alert('error');
+          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'No se ha podido registrar el usuario' });
         }
       })
   }

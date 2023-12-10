@@ -4,18 +4,20 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CallsService } from '../../services/calls.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-add-call-page',
   templateUrl: './add-call-page.component.html',
-  styleUrl: './add-call-page.component.css'
+  styleUrl: './add-call-page.component.css',
+  providers: [MessageService]
 })
 export class AddCallPageComponent {
   private fb             = inject( FormBuilder );
   private callsService   = inject( CallsService );
   private router         = inject( Router );
+  private messageService = inject( MessageService );
   private activatedRoute = inject( ActivatedRoute );
-  private editar: boolean = false;
 
   public myForm: FormGroup = this.fb.group({
     id: [],
@@ -26,10 +28,10 @@ export class AddCallPageComponent {
 
   ngOnInit(): void {
 
-    if ( !this.router.url.includes('edit') ) return;
+    if ( !this.router.url.includes('editar') ) return;
     this.activatedRoute.params
       .pipe(
-        switchMap( ({ id }) => this.callsService.getCallById( id ) ),
+        switchMap( ({ id }) => this.callsService.getCallOpen() ),
       ).subscribe( convocatoria => {
         if ( !convocatoria ) {
           return this.router.navigateByUrl('/');
@@ -40,10 +42,9 @@ export class AddCallPageComponent {
           fechaFin: new Date(convocatoria.fechaFin),
           fechaResultados: new Date(convocatoria.fechaResultados),
         }
-        this.editar = true;
         this.myForm.reset( data );
         return;
-      });
+      }); 
 
   }
 
@@ -61,19 +62,37 @@ export class AddCallPageComponent {
     }
     const data = this.myForm.value;
     if(this.myForm.value.id){
-      this.callsService.updateCall(data);
+      this.callsService.updateCall(data)
+        .subscribe({
+          next: () => {
+            this.messageService.add({ severity: 'success', summary: 'Exito', detail: 'Se ha editado la convocatoria' });
+            this.myForm.reset();
+          },
+          error: (error) => {
+            if(error.status === 200) {
+              this.messageService.add({ severity: 'success', summary: 'Exito', detail: 'Se ha editado la convocatoria' });
+              this.myForm.reset();
+            } else {
+              this.messageService.add({ severity: 'error', summary: 'Error', detail: 'No se ha podido editar la convocatoria' });
+            }
+          }
+        });
     } else {
-      this.callsService.addCall(data);
+      this.callsService.addCall(data)
+        .subscribe({
+          next: () => {
+            this.messageService.add({ severity: 'success', summary: 'Exito', detail: 'Se ha abierto una convocatoria' });
+            this.myForm.reset();
+          },
+          error: (error) => {
+            if(error.status === 200) {
+              this.messageService.add({ severity: 'success', summary: 'Exito', detail: 'Se ha abierto una convocatoria' });
+              this.myForm.reset();
+            } else {
+              this.messageService.add({ severity: 'error', summary: 'Error', detail: 'No se ha podido abrir la convocatoria' });
+            }
+          }
+        });
     }
-    /* this.callsService.addCall(data)
-      .subscribe({
-        next: () => {
-          alert('Se ha agregado una convocatoria');
-        },
-        error: (message) => {
-          console.log(message);
-          alert('error');
-        }
-      }); */
   }
 }

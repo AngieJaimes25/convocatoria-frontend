@@ -36,11 +36,15 @@ export class AuthService {
   login( codigo: string, email: string, contrasenia: string ): Observable<boolean> {
     const url  = `${ this.baseUrl }/login`;
     const body = { codigo, email, contrasenia };
-    return this.http.post<LoginResponse>( url, body )
-      .pipe(
-        map( ({ Username, token }) => this.setAuthentication( Username, token )),
-        catchError( err => throwError( () => err.error.message ))
-      );
+    console.log(body);
+    return this.http.post<LoginResponse>(url, body)
+    .pipe(
+      map(({ Username, token }) => this.setAuthentication(Username, token)),
+      catchError(err => {
+        console.error('Error en la solicitud:', err);  // Log del error en la consola
+        return throwError(() => err.error.Message);
+      })
+    );
   }
 
   register( codigo: string, email: string, password: string ): Observable<boolean> {

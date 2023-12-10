@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { SubjectsService } from '../../services/subjects.service';
 
 @Component({
   selector: 'app-materias-proposals-page',
@@ -7,4 +8,11 @@ import { Component } from '@angular/core';
 })
 export class MateriasProposalsPageComponent {
 
+  private subjectsService = inject(SubjectsService);
+  subjects: any[] = [];
+
+  ngOnInit(): void {
+    this.subjectsService.getSubjects()
+      .subscribe( data => this.subjects = data );
+  }
 }
