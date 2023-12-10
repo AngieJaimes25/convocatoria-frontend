@@ -44,7 +44,6 @@ export class LoginPageComponent {
     this.authService.login(codigo, email, contrasenia)
       .subscribe({
         next: () => {
-          alert('exitoso');
           this.router.navigateByUrl('/admin');
           /* if(codigo.startsWith('1')) {
             this.router.navigateByUrl('/admin');
